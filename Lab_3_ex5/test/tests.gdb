@@ -40,6 +40,28 @@ checkResult
 
 # Add tests below
 
+test "PIND: 0x00 PINB: 0x00=> PORTB: 0x00"
+setPIND 0x00
+setPINB 0x00
+continue 5
+expectPORTB 0x00
+checkResult
+
+test "PIND: 0x30 PINB: 0x00//96=> PORTB: 0x02"
+setPIND 0x30
+setPINB 0x00
+continue 5
+expectPORTB 0x02
+checkResult
+
+test "PIND: 0x20 PINB: 0x01//65=> PORTB: 0x05"
+setPIND 0x20
+setPINB 0x01
+continue 5
+expectPORTB 0x05
+checkResult
+
+
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
 eval "shell echo Passed %d/%d tests.\n",$passed,$tests

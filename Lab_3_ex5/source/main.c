@@ -1,8 +1,8 @@
 /*	Author: yxing024
  *  Partner(s) Name: Hao Wu
- *	Lab Section:
- *	Assignment: Lab #  Exercise #
- *	Exercise Description: [optional - include for your own benefit]
+ *	Lab Section:Lab 3
+ *	Assignment: Lab #  Exercise 5#
+ *	Exercise Description: [Air bag]
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
@@ -14,10 +14,36 @@
 
 int main(void) {
     /* Insert DDR and PORT initializations */
+    DDRB = 0xFE; PORTB = 0x00;
+    DDRD = 0x00; PORTD = 0x00;
+
+    unsigned char weightB;
+    unsigned char weightD;
+    unsigned short weight;
+    unsigned char tmpB;
 
     /* Insert your solution below */
-    while (1) {
+    while (1) 
+      {
+	weightD = PIND;
+	tmpB = PINB;
+	weightB = tmpB & 0x01;
 
-    }
+        weight = (weightD<<1) + weightB;
+  	
+	if (weight > 70)
+	  {
+	    tmpB = tmpB | 0x02;
+	  }
+	else 
+	  {
+	    if (weight > 5)
+	      {
+	        tmpB = tmpB | 0x04;
+	      }
+	  }
+	
+	PORTB = tmpB;
+      }
     return 1;
 }
